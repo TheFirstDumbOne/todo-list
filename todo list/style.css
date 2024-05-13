@@ -1,0 +1,47 @@
+body {
+    background-color: black;
+    color : white;
+}
+
+#addTask {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    height: 100%;
+    width: 250px;
+    background-color: rgb(43, 43, 43);
+}
+
+#content {
+margin-left: 250px;
+}
+
+#errorMessage {
+    display: none;
+    color: red;
+}
+
+.todoList {
+    max-width: 25%;
+    position: relative;
+    display: inline-block;
+    padding: 1%;
+    word-wrap: break-word;
+}
+
+.task {
+    padding: 10px;
+    background-color: gray;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-left: -25px;
+    padding-left: 25px;
+}
+
+.extraInfo {
+    display: none;
+}
+
+.task:hover .extraInfo {
+    display: inline;
+}

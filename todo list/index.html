@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+        <title>
+            todo list
+        </title>
+
+        <link rel="stylesheet" href="style.css" type="text/css">
+
+        
+    </head>
+
+    <body>
+        <!-- add task UI -->
+        <div id = "addTask">
+            <h1 style="text-align: center;">Add task</h1>
+
+            <form onsubmit="return false;">
+                <!-- inputs -->
+                <label for="todoName">Task name:</label><br>
+                <input type="text" id = "taskName"><br><br>
+
+                <label for="taskDesc">Task description:</label><br>
+                <input type="text" id = "taskDesc"><br>
+
+                <br> <label for="taskDate">Task due date:</label><br>
+                <input type="date" id = "taskDate"><br>
+
+                <br><button type="button" id="submitTodo" onclick="CreateTask()">Add task</button>
+            </form>
+            <p id="errorMessage"></p>
+
+        </div>
+
+        <!-- tasks and lists -->
+        <div id="content">
+
+            <h1 style="text-align: center;">Todo Lists</h1>
+            
+            <!-- todays todo list -->
+            <div class="todoList">
+
+                <p>today</p>
+                <ol id = "todayTodoList"></ol>
+
+            </div>
+
+            <div class="todoList">
+                <p>tomorrow</p>
+            </div>
+
+            
+
+            <script src="function.js"></script>
+
+        </div>
+
+    </body>
+
+</html>
