@@ -23,10 +23,10 @@ margin-left: 250px;
 
 .todoList {
     max-width: 25%;
-    position: relative;
-    display: inline-block;
+    display: inline;
     padding: 1%;
     word-wrap: break-word;
+    float: left;
 }
 
 .task {

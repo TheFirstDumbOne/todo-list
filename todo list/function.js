@@ -9,7 +9,10 @@ function createSpace(object, numberOfSpaces) {
 
 function CreateTask() {
 
-    const todoList = document.getElementById("todayTodoList");
+    //  todo lists
+    const todayTodoList = document.getElementById("todayTodoList");
+    const tomorrowTodoList = document.getElementById("tomorrowTodoList");
+
     const errorText = document.getElementById("errorMessage");
 
     // creating elements for the task
@@ -49,7 +52,7 @@ function CreateTask() {
     // ------------------------------------------------- putting everything into the website
     // task
     task.appendChild(taskContent);
-    todoList.appendChild(task);
+    todayTodoList.appendChild(task);
 
     // checkbox
     taskContent.appendChild(taskCheckbox);
