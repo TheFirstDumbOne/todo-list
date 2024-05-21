@@ -1,3 +1,4 @@
+// ----- just automated this so i dont have to write multiple break elements in js
 function createSpace(object, numberOfSpaces) {
 
     for (i = 0; i <  numberOfSpaces; i++) {
@@ -7,15 +8,42 @@ function createSpace(object, numberOfSpaces) {
 
 }
 
+// Month in JavaScript is 0-indexed (January is 0, February is 1, etc), 
+// but by using 0 as the day it will give us the last day of the prior
+// month. So passing in 1 as the month number will return the last day
+// of January, not February
+function daysInMonth (month, year) {
+    return new Date(year, month, 0).getDate();
+}
+
+
+function GetDateNumber (fullDate) {
+    var today = new Date();
+
+    var daysUntilEndOfMonth = daysInMonth(today.getMonth() + 1, today.getFullYear()) - today.getDate();
+
+    switch (fullDate) {
+        case "today":
+            var answer = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+            return answer;
+        
+        case "tomorrow":
+            
+    }
+    
+    
+}
+
 function CreateTask() {
 
     //  todo lists
-    const todayTodoList = document.getElementById("todayTodoList");
-    const tomorrowTodoList = document.getElementById("tomorrowTodoList");
+    const todayTodoList = document.getElementById("todayList");
+    const tomorrowTodoList = document.getElementById("tomorrowList");
+    const noDueDateTodoList = document.getElementById("noDueDateList");
 
     const errorText = document.getElementById("errorMessage");
 
-    // creating elements for the task
+    // --- creating elements for the task ---
     const task = document.createElement("li");
     const taskContent = document.createElement("div");
     const extraInfo = document.createElement("div");
@@ -24,7 +52,7 @@ function CreateTask() {
     const taskDescription = document.createTextNode(document.getElementById("taskDesc").value.trim());
     const taskDueDate = document.createTextNode(document.getElementById("taskDate").value);
 
-    // ----------------------------------------------checking which inputs are empty
+    // --- checking which inputs are empty ---
 
     // name
     if (taskName.nodeValue.trim() == "") {
@@ -49,9 +77,10 @@ function CreateTask() {
     taskContent.setAttribute("class","task");
 
     
-    // ------------------------------------------------- putting everything into the website
+    // --- putting everything into the website ---
     // task
     task.appendChild(taskContent);
+    
     todayTodoList.appendChild(task);
 
     // checkbox
@@ -75,4 +104,5 @@ function CreateTask() {
     createSpace(extraInfo,1);
     extraInfo.appendChild(taskDescription);
 
+    console.log(GetDateNumber("today"));
 }
