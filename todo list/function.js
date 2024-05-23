@@ -24,13 +24,20 @@ function GetDateNumber (fullDate) {
 
     switch (fullDate) {
         case "today":
-            var answer = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+            var answer = today.getFullYear() + "/" + (today.getMonth() + 1) + "/" + today.getDate();
             return answer;
         
         case "tomorrow":
+            var answer;
+            if ((today.getDate() + 1) >= daysInMonth(today.getMonth(), today.getFullYear())) {
+                answer = today.getFullYear() + "/" + (today.getMonth() + 2) + "/" + 1;
+                return answer;
+            } else {
+                answer = today.getFullYear() + "/" + (today.getMonth() + 1) + "/" + (today.getDate() +1);
+                return answer;
+            }
             
     }
-    
     
 }
 
@@ -78,10 +85,11 @@ function CreateTask() {
 
     
     // --- putting everything into the website ---
+    // ---- checking what date the due date is and creating 
+    todayTodoList.appendChild(task);
+
     // task
     task.appendChild(taskContent);
-    
-    todayTodoList.appendChild(task);
 
     // checkbox
     taskContent.appendChild(taskCheckbox);
@@ -104,5 +112,4 @@ function CreateTask() {
     createSpace(extraInfo,1);
     extraInfo.appendChild(taskDescription);
 
-    console.log(GetDateNumber("today"));
 }
