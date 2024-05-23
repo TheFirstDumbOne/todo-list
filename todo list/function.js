@@ -17,26 +17,37 @@ function daysInMonth (month, year) {
 }
 
 
-function GetDateNumber (fullDate) {
-    var today = new Date();
+function GetDateNumber (findDate) {
+    // today and all its dates
+    //debug
+    var today = {
+        day : document.getElementById("date").value.split("-")[2],
+        month: document.getElementById("date").value.split("-")[1],
+        year: document.getElementById("date").value.split("-")[0],
+        fullDate: document.getElementById("date").value
+    };
+    console.log(today);
 
-    var daysUntilEndOfMonth = daysInMonth(today.getMonth() + 1, today.getFullYear()) - today.getDate();
+    var daysUntilEndOfMonth = daysInMonth(Number(today.month), Number(today.year)) - today.day;
+    
+    // --- finding the date ---
+    switch (findDate) {
 
-    switch (fullDate) {
+        // today
         case "today":
-            var answer = today.getFullYear() + "/" + (today.getMonth() + 1) + "/" + today.getDate();
-            return answer;
+            return today.fullDate;
         
+        // tomorrow
         case "tomorrow":
             var answer;
-            if ((today.getDate() + 1) >= daysInMonth(today.getMonth(), today.getFullYear())) {
-                answer = today.getFullYear() + "/" + (today.getMonth() + 2) + "/" + 1;
+            if ((Number(today.day) + 1) >= daysInMonth(today.month, today.year)) {
+                answer = today.year + "-" + (Number(today.month) + 1) + "-1";
                 return answer;
             } else {
-                answer = today.getFullYear() + "/" + (today.getMonth() + 1) + "/" + (today.getDate() +1);
+                answer = today.year + "-" + today.month + "-" + (Number(today.day) + 1);
                 return answer;
             }
-            
+        
     }
     
 }
