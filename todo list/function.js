@@ -21,12 +21,17 @@ function GetDateNumber (findDate) {
     // today and all its dates
     //debug
     var today = {
-        day : document.getElementById("date").value.split("-")[2],
-        month: document.getElementById("date").value.split("-")[1],
-        year: document.getElementById("date").value.split("-")[0],
-        fullDate: document.getElementById("date").value
+        fullDate: new Date().getDate() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getFullYear(),
+        day : new Date().getDate(),
+        month: null,
+        year: new Date().getFullYear()
     };
-    console.log(today);
+
+    if ((new Date().getMonth() + 1) < 10) {
+        today.month = "0" + (new Date().getMonth() + 1);
+    } else {
+        today.month = new Date.getMonth() + 1;
+    }
 
     var daysUntilEndOfMonth = daysInMonth(Number(today.month), Number(today.year)) - today.day;
     
@@ -41,7 +46,7 @@ function GetDateNumber (findDate) {
         case "tomorrow":
             var answer;
             if ((Number(today.day) + 1) >= daysInMonth(today.month, today.year)) {
-                answer = today.year + "-" + (Number(today.month) + 1) + "-1";
+                answer = today.year + "-" + (today.month + 1) + "-1";
                 return answer;
             } else {
                 answer = today.year + "-" + today.month + "-" + (Number(today.day) + 1);
@@ -51,7 +56,6 @@ function GetDateNumber (findDate) {
     }
     
 }
-
 function CreateTask() {
 
     //  todo lists
@@ -68,11 +72,12 @@ function CreateTask() {
     const taskName = document.createTextNode(document.getElementById("taskName").value.trim());
     const taskCheckbox = document.createElement("input");
     const taskDescription = document.createTextNode(document.getElementById("taskDesc").value.trim());
-    const taskDueDate = document.createTextNode(document.getElementById("taskDate").value);
+    const taskDueDateText = document.createTextNode(document.getElementById("taskDate").value);
+    const taskDueDate = document.getElementById("taskDate").value
 
     // --- checking which inputs are empty ---
 
-    // name
+    // checking if there is no name
     if (taskName.nodeValue.trim() == "") {
         errorText.style["display"] = "block";
         errorText.innerHTML = "ERROR: No name";
@@ -81,13 +86,13 @@ function CreateTask() {
         errorText.style["display"] = "none";
     }
 
-    // description
+    // checking if there is descrption description
     if (taskDescription.nodeValue.trim() == "") {
         taskDescription.nodeValue = "None"
     }
 
-    if (taskDueDate.nodeValue.trim() == "") {
-        taskDueDate.nodeValue = "None"
+    if (taskDueDateText.nodeValue.trim() == "") {
+        taskDueDateText.nodeValue = "None"
     }
 
     extraInfo.setAttribute("class","extraInfo");
@@ -96,9 +101,6 @@ function CreateTask() {
 
     
     // --- putting everything into the website ---
-    // ---- checking what date the due date is and creating 
-    todayTodoList.appendChild(task);
-
     // task
     task.appendChild(taskContent);
 
@@ -115,12 +117,25 @@ function CreateTask() {
     // due date
     extraInfo.appendChild(document.createTextNode("Due date:"))
     createSpace(extraInfo,1);
-    extraInfo.appendChild(taskDueDate);
+    extraInfo.appendChild(taskDueDateText);
     createSpace(extraInfo,2);
 
     // task description
     extraInfo.appendChild(document.createTextNode("Description:"));
     createSpace(extraInfo,1);
     extraInfo.appendChild(taskDescription);
+
+    // --- checking what date the due date is and creating  ---
+    console.log(GetDateNumber("today") +", " +taskDueDate.toString());
+    if (taskDueDate == "") {
+        noDueDateTodoList.appendChild(task);
+        return;
+    } else if (taskDueDate.toString() == GetDateNumber("today")) {
+        todayTodoList.appendChild(task);
+        return;
+    } else if (taskDueDate == GetDateNumber("tomorrow")) {
+        tomorrowTodoList.appendChild(task);
+        return;
+    }
 
 }
