@@ -19,23 +19,19 @@ function daysInMonth (month, year) {
 
 function GetDateNumber (findDate) {
     // today and all its dates
-    //debug
+    // --- finding today ---
     var today = {
-        fullDate: new Date().getDate() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getFullYear(),
         day : new Date().getDate(),
-        month: null,
-        year: new Date().getFullYear()
+        month: new Date().getMonth() + 1,
+        year: new Date().getFullYear(),
+        fullDate: new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate()
     };
 
-    if ((new Date().getMonth() + 1) < 10) {
-        today.month = "0" + (new Date().getMonth() + 1);
-    } else {
-        today.month = new Date.getMonth() + 1;
-    }
+    console.log(today.month);
 
     var daysUntilEndOfMonth = daysInMonth(Number(today.month), Number(today.year)) - today.day;
     
-    // --- finding the date ---
+    // --- finding wanted date ---
     switch (findDate) {
 
         // today
@@ -56,6 +52,8 @@ function GetDateNumber (findDate) {
     }
     
 }
+
+
 function CreateTask() {
 
     //  todo lists
@@ -126,7 +124,7 @@ function CreateTask() {
     extraInfo.appendChild(taskDescription);
 
     // --- checking what date the due date is and creating  ---
-    console.log(GetDateNumber("today") +", " +taskDueDate.toString());
+    console.log(GetDateNumber("today") +", " + Number(taskDueDate));
     if (taskDueDate == "") {
         noDueDateTodoList.appendChild(task);
         return;
