@@ -27,8 +27,6 @@ function GetDateNumber (findDate) {
         fullDate: new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate()
     };
 
-    console.log(today.month);
-
     var daysUntilEndOfMonth = daysInMonth(Number(today.month), Number(today.year)) - today.day;
     
     // --- finding wanted date ---
@@ -53,6 +51,16 @@ function GetDateNumber (findDate) {
     
 }
 
+// taking out the zeros of the task due date
+function FormatDate(date) {
+    var answer = new Date().getFullYear();
+
+    for (var i = 1; i < date.split("-").length; i++) {
+        answer += "-" + Number(date.split("-")[i]);
+    };
+
+    return answer;
+}
 
 function CreateTask() {
 
@@ -71,10 +79,9 @@ function CreateTask() {
     const taskCheckbox = document.createElement("input");
     const taskDescription = document.createTextNode(document.getElementById("taskDesc").value.trim());
     const taskDueDateText = document.createTextNode(document.getElementById("taskDate").value);
-    const taskDueDate = document.getElementById("taskDate").value
+    const taskDueDate = document.getElementById("taskDate").value;
 
     // --- checking which inputs are empty ---
-
     // checking if there is no name
     if (taskName.nodeValue.trim() == "") {
         errorText.style["display"] = "block";
@@ -124,14 +131,13 @@ function CreateTask() {
     extraInfo.appendChild(taskDescription);
 
     // --- checking what date the due date is and creating  ---
-    console.log(GetDateNumber("today") +", " + Number(taskDueDate));
     if (taskDueDate == "") {
         noDueDateTodoList.appendChild(task);
         return;
-    } else if (taskDueDate.toString() == GetDateNumber("today")) {
+    } else if (FormatDate(taskDueDate) == GetDateNumber("today")) {
         todayTodoList.appendChild(task);
         return;
-    } else if (taskDueDate == GetDateNumber("tomorrow")) {
+    } else if (FormatDate(taskDueDate) == GetDateNumber("tomorrow")) {
         tomorrowTodoList.appendChild(task);
         return;
     }
