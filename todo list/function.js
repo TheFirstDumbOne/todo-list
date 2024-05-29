@@ -47,6 +47,28 @@ function GetDateNumber (findDate) {
                 return answer;
             }
         
+        // next 7 days (this week)
+        case "week":
+            
+            var answer
+            if (Number(today.day) + 7 > daysInMonth(today.month, today.year)) {
+                answer = today.year + "-" + (Number(today.month) + 1) + "-" + ((Number(today.day)+7) - daysInMonth(today.month, today.year));
+                return answer;
+            } else {
+                answer = today.year + "-" + today.month + "-" + (Number(today.day)+7);
+                return answer;
+            }
+        
+        // next 14 days (next week)
+        case "nextWeek":
+            var answer
+            if(Number(today.day) + 14 > daysInMonth(today.month, today.year)) {
+                answer = today.year + "-" + (Number(today.month) + 1) + "-" + ((Number(today.day)+14) - daysInMonth(today.month, today.year))
+                return answer;
+            } else {
+                answer = today.year + "-" + today.month + "-" + (Number(today.day) + 14);
+                return answer;
+            }
     }
     
 }

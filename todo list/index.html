@@ -20,7 +20,7 @@
 
             <form onsubmit="return false;">
                 <!-- inputs -->
-                <label for="todoName">Task name:</label><br>
+                <label for="taskName">Task name:</label><br>
                 <input type="text" id = "taskName"><br><br>
 
                 <label for="taskDesc">Task description:</label><br>
@@ -40,26 +40,46 @@
 
             <h1 style="text-align: center;">Todo Lists</h1>
             
-            <!-- todays todo list -->
+            <!-- overdue -->
             <div class="todoList">
+                <p style = "color: red;">OVER DUE</p>
+                <ol id="overDueList"></ol>
+            </div>
 
+            <!-- today -->
+            <div class="todoList">
                 <p>Today</p>
                 <ol id = "todayList"></ol>
-
             </div>
 
+            <!-- tomorrow -->
             <div class="todoList">
-
                 <p>Tomorrow</p>
                 <ol id="tomorrowList"></ol>
-
             </div>
 
+            <!-- this week -->
             <div class="todoList">
+                <p>This week</p>
+                <ol id="thisWeekList"></ol>
+            </div>
 
+            <!-- next week -->
+            <div class="todoList">
+                <p>Next week</p>
+                <ol id="nextWeekList"></ol>
+            </div>
+
+            <!-- later -->
+            <div class="todoList">
+                <p>Later</p>
+                <ol id="laterList"></ol>
+            </div>
+
+            <!-- no due date -->
+            <div class="todoList">
                 <p>No due date</p>
                 <ol id="noDueDateList"></ol>
-
             </div>
 
             <script src="function.js"></script>

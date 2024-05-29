@@ -24,7 +24,7 @@ margin-left: 250px;
 .todoList {
     max-width: 25%;
     display: inline;
-    padding: 1%;
+    padding: 3%;
     word-wrap: break-word;
     float: left;
 }
