@@ -39,7 +39,7 @@ function GetDateNumber (findDate) {
         // tomorrow
         case "tomorrow":
             var answer;
-            if ((Number(today.day) + 1) >= daysInMonth(today.month, today.year)) {
+            if ((Number(today.day) + 1) > daysInMonth(today.month, today.year)) {
                 answer = today.year + "-" + (today.month + 1) + "-1";
                 return answer;
             } else {
@@ -90,6 +90,10 @@ function CreateTask() {
     const todayTodoList = document.getElementById("todayList");
     const tomorrowTodoList = document.getElementById("tomorrowList");
     const noDueDateTodoList = document.getElementById("noDueDateList");
+    const weekList = document.getElementById("thisWeekList")
+    const overDueList = document.getElementById("overDueList");
+    const nextWeekList = document.getElementById("nextWeekList");
+    const laterList = document.getElementById("laterList");
 
     const errorText = document.getElementById("errorMessage");
 
@@ -156,11 +160,23 @@ function CreateTask() {
     if (taskDueDate == "") {
         noDueDateTodoList.appendChild(task);
         return;
+    } else if(new Date(taskDueDate).getTime() < new Date(GetDateNumber("today"))){
+        overDueList.appendChild(task);
+        return;
     } else if (FormatDate(taskDueDate) == GetDateNumber("today")) {
         todayTodoList.appendChild(task);
         return;
     } else if (FormatDate(taskDueDate) == GetDateNumber("tomorrow")) {
         tomorrowTodoList.appendChild(task);
+        return;
+    } else if (new Date(taskDueDate).getTime() > new Date(GetDateNumber("tomorrow")).getTime() && new Date(FormatDate(taskDueDate)).getTime() <= new Date(GetDateNumber("week")).getTime()) {
+        weekList.appendChild(task);
+        return;
+    } else if (new Date(FormatDate(taskDueDate)).getTime() > new Date(GetDateNumber("week")).getTime() && new Date(FormatDate(taskDueDate)).getTime() <= new Date(GetDateNumber("nextWeek")).getTime()) {
+        nextWeekList.appendChild(task);
+        return;
+    } else if(new Date(FormatDate(taskDueDate)).getTime() > new Date(GetDateNumber("nextWeek")).getTime()) {
+        laterList.appendChild(task);
         return;
     }
 
